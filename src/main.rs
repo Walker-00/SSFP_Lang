@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 use lazy_static::lazy_static;
 use std::{
     io::{stdin, Read},
@@ -89,8 +88,4 @@ fn main() {
         let tok: Token = gettok();
         println!("got token: {tok:?}");
     }
-=======
-fn main() {
-    println!("Hello, world!");
->>>>>>> ed3f166 (cargo inited)
 }
