@@ -9,7 +9,7 @@ use std::{
 enum Token {
     Tokother(i8),
     Tokeof = -1,
-    Tokdef = -2,
+    Tokfun = -2,
     Tokextern = -3,
     Tokidentifier = -4,
     Toknumber = -5,
@@ -47,7 +47,7 @@ fn gettok() -> Token {
             }
         }
         if identifierstr.as_str() == "fun" {
-            Token::Tokdef
+            Token::Tokfun
         } else if identifierstr.as_str() == "extern" {
             Token::Tokextern
         } else {
@@ -63,18 +63,18 @@ fn gettok() -> Token {
         *numval = num_str.parse().unwrap();
         Token::Toknumber
     } else if last_char == '#' {
-        while last_char != '\0' && last_char != '\n' && last_char != '\r' {
+        while last_char as u8 != 0 && last_char != '\n' && last_char != '\r' {
             stdin().read_exact(&mut input).unwrap();
             last_char = input[0] as char;
         }
         if last_char == '\n' {
             Token::Tokcommand
-        } else if last_char != '\0' {
+        } else if last_char as u8 != 0 {
             gettok()
         } else {
             Token::Tokeof
         }
-    } else if last_char == '\0' {
+    } else if last_char as u8 == 0 {
         Token::Tokeof
     } else {
         let this_char = last_char;
